@@ -1,0 +1,51 @@
+encoder.h:// vr: passez l'argument par référence pour ne pas le recopier à chaque fois que vous voulez simplement le lire et passez le const pouer dire que vous ne le modifiez pas
+tests.h:// vr: pour protéger un fichier d'entête (.h) contre une inclusion multiple lors d'une même chaine de compilation, on peut mettre soit le #ifndef/define/endif soit le #pragma (dans ce fichier vous n'en avez pas besoin puisque vous ne définissez pas de classes
+tests.h:// vr: inline super !
+tests.h:// vr: vos tests passent
+tests.h:    // vr: attention à bien avoir l'espace  en fin de lettre dans le dernier mots sinon == donnera faux
+tests.h:// vr: vos tests passent
+tests.h:    // vr: attention à bien avoir l'espace en fin de lettre dans le dernier mot pour la chaine morse témoin
+encoder.cpp:// vr: vous auriez dû faire une classe avec en attribut le dictionnaire morse et en méthodes les fonctions de conversion
+encoder.cpp:// vr: passez l'argument par référence pour en pas le recopier et const pour ne pas le modifier 
+encoder.cpp:// vr: votre code manque de commentaires
+encoder.cpp:// vr: à chaque fois que vous appelez cette fonction vous construisez ces deux listes ce qui est très cher en mouvements mémoire inutiles et en temps, et votre code ne peut donc pas être utilisé dans un système qui proposerait de traduire plusieurs phrases   
+encoder.cpp:// vr: vous devez utilsier un dictionnaire, le temps de recherche d'un élément par key sera constant contre linéaire dans votre cas
+encoder.cpp:  //vr: pourquoi des espaces entre les symboles du morse et pourquoi _ qui est difficile à voir
+encoder.cpp:  // vr:const std::string morseLetters[37] = { " ", ". _", "_ . . .", "_ . _ .", "_ . .", ".", ". . _ .", "_ _ .", ". . . .", ". .", ". _ _ _", "_ . _", ". _ . .",  "_ _", "_ .", "_ _ _", ". _ _ .", "_ _ . _", ". _ .", ". . .", "_", ". . _", ". . . _", ". _ _", "_ . . _", "_ . _ _", "_ _ . .", ". _ _ _ _", ". . _ _ _", ". . . _ _", ". . . . _", ". . . . .", "_ . . . .", "_ _ . . .", "_ _ _ . .", "_ _ _ _ .", "_ _ _ _ _"};
+encoder.cpp:    // vr: je garde le nb de lettres pour vérifiez qu'on ne sort pas du votre tableau lors de la ercherche
+encoder.cpp:    // vr: vous avez deux boucles sur le même i ? pour parcourir une string ?
+encoder.cpp:    // vr:    for (int i = 0; i < mess.length(); i++)
+encoder.cpp:    // vr: ne pas recalculer la longueur de la chaine à chaque itération
+encoder.cpp:	// vr: si i est un size_t restez cohérent et mettez j aussi size_t
+encoder.cpp:	// vr: voila où vous faites une rechercher linéaire contre une recherche en temps constant si vous prenez une std::map
+encoder.cpp:	  // vr: si la lettre n'est pas trouvée il faut arrêter la boucle
+encoder.cpp:	  // vr: attention à la segfault en accédant à morseLetters[j] si j est égal à nb_letters, préférez lancer une exception pour permettre à l'utilisateur de votre code de rattraper son erreur (je le fais dans le main)
+encoder.cpp:	// vr: morseMess.append(morseLetters[0]);
+encoder.cpp:	// vr: morseMess.append(morseLetters[0]);
+encoder.cpp:	// vr: ne mettez pas 3 espaces après chaque lettre morse, un seul suffit et 2 espaces entre les mots (par exemple) donc lorsque la lettre est un espace on ne rajoute pas le 3ième espace
+encoder.cpp:// vr: j'ai besoin d'un silence pour séparer les signes (. et -) dans le fichier de son wav
+encoder.cpp:    // vr: double frequency = 440.0; variable non utilisée ?
+encoder.cpp:    // vr: idem int volume = 32000; 
+encoder.cpp:	// vr: int i;
+encoder.cpp:  // vr: 0.1 doit être un attribut quelque part (je le mets ci-dessus)
+encoder.cpp:    // vr: ces attirbuts devraient être rangés dans une class
+encoder.cpp:	// vr:mettez la définition du i dans la boucle // int i;
+encoder.cpp:	// vr: on doit séparer les signes par un petit silence
+encoder.cpp:  // vr: 0.3 doit être un attribut quelque part
+encoder.cpp:	// vr: on doit séparer chaque lettre par un silence
+encoder.cpp:    // vr: double frequency = 440.0; variable non utilisée ?
+encoder.cpp:    // vr: idem int volume = 32000; 
+encoder.cpp:	// vr: int i;
+encoder.cpp:	    // vr: j'ai mis - à la place de _
+main_morse.cpp:// vr: ne mettez pas de code directement dans votre main, appelez-y des fonctions définies ailleurs là je la définis ici mais elle devrait être dans un fichier lié au programme morse 
+main_morse.cpp:	    // vr: pour du debug je rajoute la traduction en morse
+main_morse.cpp:  // vr: j'ai ajouté une exception lorsque la lettre à encoder n'est pas dans l'alphabet considéré, alors je l'attrape 
+tests.cpp:  // vr: vous reconstruisez à chaque appel de vos tests les deux listes de correspondance morse/lettres, vous ralentissez beaucoup votre code 
+wavfile.cpp:// vr: la lib c s'inclut avec un c devant les noms de fichier d'entête et sans .h (comme lea lib c++ on ne met plus le .h genre #include<iostream> et pas #include <iostream.h>)
+wavfile.cpp:// vr: le code des fichiers wavfile sont du c, vous l'avez récupéré sur Internet, ce qui ne me dérange pas puisque nous n'avons pas vu en cours les notions liées aux fichiers wav, par contre il est de bon ton de citer ses sources (même dans des projets et TPs internes aux mines),. La personne qui a mis ce code en accès libre a dû lui attribuer une licence particulière dont il faut tenir compte
+wavfile.cpp:// vr: ouvre le fichier et y ećrit l'entête de RIFF...
+wavfile.cpp:  // vr: essayer d'ouvrir le fichier avant de calculer quoi que ce soit puisque vous arrêtez la fonction
+wavfile.cpp:	// vr: je remplace votre return 0 par un throw d'une erreur comme cela la fonction writting n'est pas continuée
+Makefile:# vr: -Wno-stringop-truncation évite des warnings de fin de chaîne tronquée
+Makefile:# vr: j'enlève -Wall
+Makefile:# vr: j'ai rajouté une règle pour produire les deux exécutables par simplicité pour mes tests

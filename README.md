@@ -1,5 +1,5 @@
 # projet_morse
 
-Le décodage n'a pas été fait.
+Le décodage de WAV n'a pas été fait.
 
-Le programme se lance avec la commande 'make'
+Ce programme se compile avec la commande 'make morse' ou 'make tests' et se lance avec la commande './morse' ou './tests'
